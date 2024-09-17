@@ -67,5 +67,30 @@ You should see:
   "type": "Microsoft.Resources/resourceGroups"
 }
 ```
+### Create an Azure Databricks workspace
+```bash
+az extension add --name databricks
+az databricks workspace create --resource-group mikeinterview --name mikeinterview --location westus --sku standard
+```
+### Login to your Azure Databricks workspace
+Browse to the Azure Portal and click on your newly created Databricks resource, then click **Launch Workspace**.
+![LaunchDatabricks](assets/images/2024-09-13-MikeInterviewProblem/launchdatabricks.png)
+
+
+### Add a compute cluster
+Click on **Compute** and then **Create Compute**.
+![LaunchDatabricks](assets/images/2024-09-13-MikeInterviewProblem/createcompute.png)
+
+Leave the defaults but change the **Terminate after** setting to 15 minutes (to save costs).
+![LaunchDatabricks](assets/images/2024-09-13-MikeInterviewProblem/createcompute-settings.png)
+
+### Create a notebook
+Click **New** -> **Notebook**
+![LaunchDatabricks](assets/images/2024-09-13-MikeInterviewProblem/newnotebook.png)
+
+In the notebook code cell, run some code. You'll be prompted to start your compute cluster. Click **Start, attach and run**.
+
+![LaunchDatabricks](assets/images/2024-09-13-MikeInterviewProblem/startandrun.png)
+
 
 
