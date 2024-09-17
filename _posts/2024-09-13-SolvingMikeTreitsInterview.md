@@ -67,6 +67,12 @@ You should see:
   "type": "Microsoft.Resources/resourceGroups"
 }
 ```
+### Register necessary providers
+```bash
+az provider register --namespace Microsoft.Compute
+az provider register --namespace Microsoft.Databricks
+```
+
 ### Create an Azure Databricks workspace
 ```bash
 az extension add --name databricks
@@ -92,5 +98,10 @@ In the notebook code cell, run some code. You'll be prompted to start your compu
 
 ![LaunchDatabricks](assets/images/2024-09-13-MikeInterviewProblem/startandrun.png)
 
+The cluster should start within a few minutes and the code cell will run. 
+
+At this point we're up and running with a cloud Spark environment we can use to try and solve the interview problem. 
+
+## Generate the data
 
 
