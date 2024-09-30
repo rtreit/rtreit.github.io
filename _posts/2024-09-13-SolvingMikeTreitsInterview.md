@@ -161,7 +161,7 @@ hexyl --length 64 2.bin
 This will show us the first 64 bytes from each of the input files. 
 ![Hexyl](assets/images/2024-09-13-MikeInterviewProblem/hexyldata.png)
 
-What is this telling us? Well we know from Mike's blog post that each file is a sequence of 32 bit integers, in little endian byte order. So we're looking at the raw bytes for 8 32-bit integers. We can convert a couple of the integers from the first file's output with a simple Python command using the highly useful struct module:
+What is this telling us? Well we know from Mike's blog post that each file is a sequence of 32 bit integers, in little endian byte order. So we're looking at the raw bytes for 16 32-bit integers from each file. We can convert a couple of the integers from the first file's output with a simple Python command using the highly useful struct module:
 ```bash
 python3 -c "import struct; print(struct.unpack('<i', bytes.fromhex('9a31b730'))[0])"
 python3 -c "import struct; print(struct.unpack('<i', bytes.fromhex('a2441870'))[0])"
