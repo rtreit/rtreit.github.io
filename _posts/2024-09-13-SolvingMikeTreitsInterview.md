@@ -599,4 +599,9 @@ Now we just need to send our results to Mike to verify that we solved his proble
 
 **💡Note**: To avoid spoilers, I redacted the random seeds used for my solution (and the SAS token for the file download) in the image.
 
+A short while later I received the thumbs up:
+![Confirmation](assets/images/2024-09-13-MikeInterviewProblem/confirmation.png)
+
+Success!
+
 This was a fun little exercise in pragmatic problem solving using Azure cloud and Spark. Thanks to Mike for posing his interview question. If you haven't checked out his blog, I highly recommend it: [mtreit.com](https://mtreit.com/)
