@@ -1,5 +1,5 @@
 ---
-title: Solving Mike Treit's Interview Problem
+title: Solving Mike Treit's Interview Problem 
 date: 2024-09-13
 categories: [Technology]
 tags: [coding,datascience]     
