@@ -159,7 +159,7 @@ hexyl --length 64 1.bin
 hexyl --length 64 2.bin
 ```
 This will show us the first 64 bytes from each of the input files. 
-![Hexyl](assets/images/2024-09-13-MikeInterviewProblem/hexyldata.png)
+![Hexyl](/assets/images/2024-09-13-MikeInterviewProblem/hexyldata.png)
 
 What is this telling us? Well we know from Mike's blog post that each file is a sequence of 32 bit integers, in little endian byte order. So we're looking at the raw bytes for 16 32-bit integers from each file. We can convert a couple of the integers from the first file's output with a simple Python command using the highly useful struct module:
 ```bash
@@ -167,7 +167,7 @@ python3 -c "import struct; print(struct.unpack('<i', bytes.fromhex('9a31b730'))[
 python3 -c "import struct; print(struct.unpack('<i', bytes.fromhex('a2441870'))[0])"
 ```
 
-![ByteIntegers](assets/images/2024-09-13-MikeInterviewProblem/byteintegers.png)
+![ByteIntegers](/assets/images/2024-09-13-MikeInterviewProblem/byteintegers.png)
 
 So each file consists of 13,421,772,800 32 bit integers. Our task is to output a 3rd little endian binary file with the integers that are shared between the 2 files. Let's get to work!
 
@@ -266,16 +266,16 @@ Get your Databricks workspace URL.
 echo "https://$(az databricks workspace show --resource-group mikeinterview --name mikeinterview --query 'workspaceUrl' --output tsv)"
 ```
 Click the URL or paste it into your browser and login to Databricks.
-![DatabricksLogin](assets/images/2024-09-13-MikeInterviewProblem/dblogin.png)
+![DatabricksLogin](/assets/images/2024-09-13-MikeInterviewProblem/dblogin.png)
 
 Generate a PAT in the Databricks portal. First click on your profile and select Settings.
-![ProfileSettings](assets/images/2024-09-13-MikeInterviewProblem/profilesettings.png)
+![ProfileSettings](/assets/images/2024-09-13-MikeInterviewProblem/profilesettings.png)
 
 Next click on **Developer** and **Generate new token**.
-![GenerateToken](assets/images/2024-09-13-MikeInterviewProblem/generatepat.png)
+![GenerateToken](/assets/images/2024-09-13-MikeInterviewProblem/generatepat.png)
 
 Enter a description and generate the personal access token. 
-![PAT](assets/images/2024-09-13-MikeInterviewProblem/pat.png)
+![PAT](/assets/images/2024-09-13-MikeInterviewProblem/pat.png)
 
 Make sure to copy it, as this will be the only time you will be able to access the full PAT. 
 
@@ -328,11 +328,11 @@ databricks secrets put-secret mikeinterview sastoken --string-value "$sasToken"
 
 ## Create a notebook
 In your Databricks workspace, click **New** -> **Notebook**
-![LaunchDatabricks](assets/images/2024-09-13-MikeInterviewProblem/newnotebook.png)
+![LaunchDatabricks](/assets/images/2024-09-13-MikeInterviewProblem/newnotebook.png)
 
 In the notebook code cell, run some code. If your cluster has already spun down, you'll be prompted to start your compute cluster: click **Start, attach and run**.
 
-![LaunchDatabricks](assets/images/2024-09-13-MikeInterviewProblem/startandrun.png)
+![LaunchDatabricks](/assets/images/2024-09-13-MikeInterviewProblem/startandrun.png)
 
 The cluster should start within a few minutes and the code cell will run. 
 
@@ -341,7 +341,7 @@ At this point we're up and running with a cloud Spark environment we can use to 
 # Solving the problem
 The PySpark code to actually find the common integers between the 2 binary files is pretty straightforward. We just need to convert the raw bytes into a couple Spark dataframes and do an inner join to get the integers that are shared across both files. The notebook environment provides a nice way to perform data analysis in a structured, repeatable way. 
 
-![TheNotebook](assets/images/2024-09-13-MikeInterviewProblem/notebook.png)
+![TheNotebook](/assets/images/2024-09-13-MikeInterviewProblem/notebook.png)
 
 Let's break the solution down.
 ```python
@@ -506,7 +506,7 @@ Let's do a quick sanity check.
 ```bash
 hexyl --length 64 joined.bin
 ```
-![ResultBytes](assets/images/2024-09-13-MikeInterviewProblem/resultbytes.png)
+![ResultBytes](/assets/images/2024-09-13-MikeInterviewProblem/resultbytes.png)
 Picking the 10th random integer CA 08 00 80 (-2147481398) present in our result file, we should be able to find it in both source files.
 ```python
 def find_byte_sequence(file_path, sequence):
@@ -595,12 +595,12 @@ Final Job Status: Completed
 File uploaded successfully to the blob container.
 ```
 Now we just need to send our results to Mike to verify that we solved his problem, and we're done!
-![SendToMike](assets/images/2024-09-13-MikeInterviewProblem/sendtomike.png)
+![SendToMike](/assets/images/2024-09-13-MikeInterviewProblem/sendtomike.png)
 
 **💡Note**: To avoid spoilers, I redacted the random seeds used for my solution (and the SAS token for the file download) in the image.
 
 A short while later I received the thumbs up:
-![Confirmation](assets/images/2024-09-13-MikeInterviewProblem/confirmation.png)
+![Confirmation](/assets/images/2024-09-13-MikeInterviewProblem/confirmation.png)
 
 Success!
 
